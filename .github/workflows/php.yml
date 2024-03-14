@@ -25,7 +25,7 @@ jobs:
         run: composer update --no-scripts
 
       - name: Create archive
-        run: Compress-Archive -Path 'vendor', 'api', 'key', 'index.php' -DestinationPath cos-api.zip
+        run: Compress-Archive -Path 'vendor', 'api', 'key', 'index.php', 'styles.css', 'favicon.ico' -DestinationPath cos-api.zip
 
       - name: Upload cos-api
         uses: actions/upload-artifact@v3.1.3
