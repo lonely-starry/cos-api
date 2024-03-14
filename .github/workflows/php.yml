@@ -25,7 +25,7 @@ jobs:
         run: composer update --no-scripts
 
       - name: Create archive
-        run: zip -r cos-api.zip vendor api key index.php
+        run: 7z -a cos-api.zip vendor api key index.php
 
       - name: Upload cos-api
         uses: actions/upload-artifact@v3.1.3
