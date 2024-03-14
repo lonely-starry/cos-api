@@ -1,48 +1,34 @@
-name: PHP Composer
+name: Update Vendor and Package
 
 on:
   push:
-    branches: 
+    branches:
       - lonely
 
 jobs:
-  build:
-
+  update-vendor-and-package:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Switch to project directory
-        run: cd $GITHUB_WORKSPACE
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate --strict
-
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
+          php-version: '8.x'
 
-      - name: Clear Composer cache
-        run: composer clear-cache
+      - name: Install Composer dependencies
+        run: composer install --no-scripts
 
-      - name: Update dependencies
-        run: composer update
+      - name: Update vendor directory
+        run: composer update --no-scripts
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
-
-      - name: Package files
-        run: tar -czvf files.tar.gz .
+      - name: Package project with vendor directory
+        run: tar -cvzf project_with_vendor.tar.gz .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: packaged-files
-          path: files.tar.gz
+          name: project_with_vendor
+          path: project_with_vendor.tar.gz
