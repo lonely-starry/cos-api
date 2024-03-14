@@ -25,10 +25,12 @@ jobs:
         run: composer update --no-scripts
 
       - name: Package project with vendor directory
-        run: tar -cvzf project_with_vendor.tar.gz .
+        run: tar -cvzf cos-api.tar.gz .
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
+      - name: Upload cos-api
+        uses: actions/upload-artifact@v3.1.3
         with:
-          name: project_with_vendor
-          path: project_with_vendor.tar.gz
+          name: cos-api
+          path: |
+            vendor/
+            !(.??*)
