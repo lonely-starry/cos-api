@@ -29,7 +29,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
-    - name: Install dependencies
+    - name: update dependencies
       run: composer update
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
