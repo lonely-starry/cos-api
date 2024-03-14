@@ -25,11 +25,11 @@ jobs:
         run: composer update --no-scripts
 
       - name: Create archive
-        run: zip -r cos-api.zip vendor/ !(.??*)  
+        run: tar -zcvf cos-api.tar.gz vendor/ !(.??*)  
 
       - name: Upload cos-api
         uses: actions/upload-artifact@v3.1.3
         with:
           name: cos-api
-          path: cos-api.zip
+          path: cos-api.tar.gz
             
