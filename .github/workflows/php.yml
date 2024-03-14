@@ -24,13 +24,9 @@ jobs:
       - name: Update vendor directory
         run: composer update --no-scripts
 
-      - name: Package project with vendor directory
-        run: tar -zcvf cos-api.tar.gz .
-
       - name: Upload cos-api
         uses: actions/upload-artifact@v3.1.3
         with:
           name: cos-api
-          path: |
-            vendor/
-            !(.??*)
+          path: vendor
+            
