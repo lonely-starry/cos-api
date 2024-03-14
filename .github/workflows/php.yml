@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Switch to project directory
+        run: cd $GITHUB_WORKSPACE
+
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
 
